@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container card card-body mt-2" *ngIf="movieData">
+
+    <h1>{{movieData.title}}</h1>
+    <p>{{ movieData.releaseDate | date:'longDate' }}</p>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12 p-1" style="display: grid; place-items: center;">
+            <img [src]="movieData.thumb" style="border-radius: .5rem;">
+        </div>
+        <div class="col-lg-9 col-sm-12 col-md-6 p-1">
+            <h5>Genre: <span class="small fw-light">{{movieData.genre}}</span></h5>
+            <p>{{movieData.description}}</p>
+            <hr>
+            <h6>Director <a style="text-decoration: none;" class="fw-light mx-2">{{movieData.director}}</a></h6>
+            <hr>
+            <h6>Stars <a *ngFor="let star of movieData.cast" style="text-decoration: none;"
+                    class="fw-light mx-2">{{star.actorid.firstName + ' ' + star.actorid.lastName}}</a></h6>
+            <hr>
+            <h6>Top Cast</h6>
+            <div class="row col-12 m-1">
+                <div class="col-lg-6 col-sm-12" *ngFor="let star of movieData.cast">
+                    <div class="d-flex row">
+                        <div class="col-2" style="display: grid; place-items: center;">
+                            <img [src]="star.actorid.thumb" style="width: 80px; max-height: 80px; border-radius: 50%;">
+                        </div>
+                        <div class="col-10">
+                            <div class="card-body">
+                                <h5>{{star.actorid.firstName + ' ' + star.actorid.lastName}}</h5>
+                                <p class="text-secondary">{{star.role}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <button class="btn btn-primary m-1" (click)="onClickSave()">Save</button>
+        <button class="btn btn-primary m-1">Delete</button>
+    </div>
+</div>

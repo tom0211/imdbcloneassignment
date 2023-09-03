@@ -1,0 +1,211 @@
+<app-navbar></app-navbar>
+
+<!-- Add Director -->
+<div class="container mt-3">
+    <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#addDirectorForm"
+        aria-expanded="false">
+        Add Director
+    </button>
+    <div class="collapse" id="addDirectorForm">
+        <h2>Add Director</h2>
+        <form [formGroup]="directorForm" class="card card-body p-3 col-lg-8" (ngSubmit)="onSubmitDirector()">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
+                <div class="text-danger"
+                    *ngIf="directorForm.get('firstName')?.invalid && directorForm.get('firstName')?.touched">
+                    <span *ngIf="directorForm.get('firstName')?.hasError('required')">First name is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+                <div class="text-danger"
+                    *ngIf="directorForm.get('lastName')?.invalid && directorForm.get('lastName')?.touched">
+                    <span *ngIf="directorForm.get('lastName')?.hasError('required')">Last name is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="birthDate" class="form-label">Birth Date</label>
+                <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+            </div>
+            <div class="mb-3">
+                <label for="thumbDirector" class="form-label">Thumbnail <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" id="thumbDirector" formControlName="thumb" accept="image/*"
+                    (change)="onDirectorThumbFileChange($event)">
+                <div class="text-danger"
+                    *ngIf="directorForm.get('thumb')?.invalid && directorForm.get('thumb')?.touched">
+                    <span *ngIf="directorForm.get('thumb')?.hasError('required')">Thumbnail is required.</span>
+
+                </div>
+            </div>
+            <button type="submit" [disabled]="directorForm.invalid" class="btn btn-primary align-self-end">Add
+                Director</button>
+        </form>
+    </div>
+    <br>
+</div>
+
+<!-- Add Actor -->
+<div class="container mt-3">
+    <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#addActorForm"
+        aria-expanded="false">
+        Add Actor
+    </button>
+    <div class="collapse" id="addActorForm">
+        <h2>Add Actor</h2>
+        <form [formGroup]="actorForm" class="card card-body col-lg-8" (ngSubmit)="onSubmitActor()">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
+                <div class="text-danger"
+                    *ngIf="actorForm.get('firstName')?.invalid && actorForm.get('firstName')?.touched">
+                    <span *ngIf="actorForm.get('firstName')?.hasError('required')">First name is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+                <div class="text-danger"
+                    *ngIf="actorForm.get('lastName')?.invalid && actorForm.get('lastName')?.touched">
+                    <span *ngIf="actorForm.get('lastName')?.hasError('required')">Last name is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="birthDate" class="form-label">Birth Date</label>
+                <input type="date" class="form-control" id="birthDate" formControlName="birthDate">
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender" formControlName="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="thumbActor" class="form-label">Thumbnail <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" id="thumbActor" formControlName="thumb" accept="image/*"
+                    (change)="onActorThumbFileChange($event)">
+                <div class="text-danger" *ngIf="actorForm.get('thumb')?.invalid && actorForm.get('thumb')?.touched">
+                    <span *ngIf="actorForm.get('thumb')?.hasError('required')">Thumbnail is required.</span>
+
+                </div>
+            </div>
+            <button type="submit" [disabled]="actorForm.invalid" class="btn btn-primary align-self-end">Add
+                Actor</button>
+        </form>
+    </div>
+    <br>
+</div>
+
+<!-- Add Movie -->
+<div class="container mt-3">
+    <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#addMovieForm"
+        aria-expanded="false">
+        Add Movie
+    </button>
+    <div class="collapse" id="addMovieForm">
+        <h2>Add Movie</h2>
+        <form [formGroup]="movieForm" class="card card-body p-3 col-lg-8" (ngSubmit)="onSubmitMovie()">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="title" formControlName="title" required>
+                <div class="text-danger" *ngIf="movieForm.get('title')?.invalid && movieForm.get('title')?.touched">
+                    <span *ngIf="movieForm.get('title')?.hasError('required')">Title is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="releaseDate" class="form-label">Release Date <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="releaseDate" formControlName="releaseDate" required>
+                <div class="text-danger"
+                    *ngIf="movieForm.get('releaseDate')?.invalid && movieForm.get('releaseDate')?.touched">
+                    <span *ngIf="movieForm.get('releaseDate')?.hasError('required')">Release date is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre</label>
+                <select class="form-select" id="genre" formControlName="genre">
+                    <option value="">Select a genre</option>
+                    <option *ngFor="let genre of movieGenres" [value]="genre">{{ genre }}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" formControlName="description" rows="4"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="thumbMovie" class="form-label">Thumbnail <span class="text-danger">*</span></label>
+                <input type="file" class="form-control" id="thumbMovie" formControlName="thumb" accept="image/*"
+                    (change)="onMovieThumbFileChange($event)">
+                <div class="text-danger" *ngIf="movieForm.get('thumb')?.invalid && movieForm.get('thumb')?.touched">
+                    <span *ngIf="movieForm.get('thumb')?.hasError('required')">Thumbnail is required.</span>
+
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="director" class="form-label">Director</label>
+                <select class="form-select" id="director" formControlName="director">
+                    <option value="">Select a director</option>
+                    <option *ngFor="let director of directorList" [value]="director.id">{{ director.directorName }}
+                    </option>
+                </select>
+            </div>
+            <button type="submit" [disabled]="movieForm.invalid" class="btn btn-primary align-self-end">Add
+                Movie</button>
+        </form>
+    </div>
+</div>
+
+<!-- Add Cast -->
+<div class="container mt-3">
+    <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#addCastForm"
+        aria-expanded="false">
+        Add Cast
+    </button>
+    <div class="collapse" id="addCastForm">
+        <h2>Add Movie</h2>
+        <form [formGroup]="castForm" class="card card-body p-3 col-lg-8" (ngSubmit)="onSubmitCast()">
+            <div class="mb-3">
+                <label for="movieTitle" class="form-label">Movie <span class="text-danger">*</span></label>
+                <select class="form-select" id="movieTitle" formControlName="movieid" required>
+                    <option value="">Select a Movie</option>
+                    <option *ngFor="let movie of movieList" [value]="movie.id">{{ movie.movieTitle }}
+                    </option>
+                </select>
+                <div class="text-danger" *ngIf="castForm.get('movieid')?.invalid && castForm.get('movieid')?.touched">
+                    <span *ngIf="castForm.get('movieid')?.hasError('required')">Title is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="actorName" class="form-label">Actor <span class="text-danger">*</span></label>
+                <select class="form-select" id="actorName" formControlName="actorid" required>
+                    <option value="">Select a Actor</option>
+                    <option *ngFor="let actor of actorList" [value]="actor.id">{{ actor.actorName }}
+                    </option>
+                </select>
+                <div class="text-danger" *ngIf="castForm.get('actorid')?.invalid && castForm.get('actorid')?.touched">
+                    <span *ngIf="castForm.get('actorid')?.hasError('required')">Title is
+                        required.</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="role" formControlName="role" required>
+                <div class="text-danger" *ngIf="castForm.get('role')?.invalid && castForm.get('role')?.touched">
+                    <span *ngIf="castForm.get('role')?.hasError('required')">Role is
+                        required.</span>
+                </div>
+            </div>
+            <button type="submit" [disabled]="castForm.invalid" class="btn btn-primary align-self-end">Add
+                Cast</button>
+        </form>
+    </div>
+</div>

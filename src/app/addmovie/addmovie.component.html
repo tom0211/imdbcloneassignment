@@ -1,0 +1,150 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h1>Add New Movie</h1>
+    <div class="container mt-4">
+        <form [formGroup]="movieForm" (ngSubmit)="onSubmitMovie()">
+            <div class="mb-3">
+                <label for="movieTitle" class="form-label">Movie Title <span class="text-danger">*</span></label>
+                <input type="text" formControlName="movieTitle" class="form-control" id="movieTitle"
+                    placeholder="Enter movie title">
+            </div>
+            <div class="mb-3">
+                <label for="releaseDate" class="form-label">Release Date <span class="text-danger">*</span></label>
+                <input type="date" formControlName="movieReleaseDate" class="form-control" id="releaseDate">
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="movieGenre" id="genre">
+                    <option value="">Select Genre</option>
+                    <option *ngFor="let genre of genreList" [value]="genre">{{genre}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" formControlName="movieDescription" id="description" rows="3"
+                    placeholder="Enter description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="movie-thumb" class="form-label">Thumbnail</label>
+                <input type="file" class="form-control" id="movie-thumb" accept="image/*"
+                    (change)="onMovieThumbFileChange($event)">
+            </div>
+            <div class="mb-3 row col-md-12">
+                <div class="col-md-6">
+                    <label for="director" class="form-label">Director <span class="text-danger">*</span></label>
+                    <select class="form-select" formControlName="movieDirector" id="director">
+                        <option value="">Select Director</option>
+                        <option *ngFor="let director of directorList" [value]="director.id">{{director.directorName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <button class="btn btn-light my-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#directorBox" aria-expanded="false" aria-controls="directorBox">Add New
+                        Director</button>
+                    <form id="directorBox" class="collapse" [formGroup]="directorForm" (ngSubmit)="onSubmitDirector()">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="director-firstname" class="form-label">First Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="directorFirstName"
+                                    id="director-firstname" placeholder="Enter first name">
+                            </div>
+                            <div class="col-6">
+                                <label for="director-lastname" class="form-label">Last Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="directorLastName"
+                                    id="director-lastname" placeholder="Enter last name">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="director-birthDate" class="form-label">Birth Date <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" formControlName="directorBirthDate"
+                                    id="director-birthDate">
+                            </div>
+                            <div class="col-6">
+                                <label for="director-thumb" class="form-label">Director Thumbnail</label>
+                                <input type="file" class="form-control" id="director-thumb" accept="image/*"
+                                    (change)="onDirectorThumbFileChange($event)">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary mt-2" [disabled]="!directorForm.valid">Add Director</button>
+                    </form>
+                </div>
+
+            </div>
+            <div class="mb-3 row col-md-12">
+                <div class="col-md-6">
+                    <label for="cast" class="form-label">Cast <span class="text-danger">*</span></label>
+                    <br>
+                    <mat-form-field style="width: 97%;">
+                        <mat-label>Actor</mat-label>
+                        <mat-select multiple [(ngModel)]="selectedActorIds" [ngModelOptions]="{standalone: true}">
+                            <mat-option *ngFor="let actor of actorList"
+                                [value]="actor.id">{{actor.actorName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <button class="btn btn-light my-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#actorBox" aria-expanded="false" aria-controls="actorBox">Add New
+                        Actor</button>
+                    <form [formGroup]="actorForm" id="actorBox" class="collapse" (ngSubmit)="onSubmitActor()">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="actor-firstname" class="form-label">First Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="actorFirstName"
+                                    id="actor-firstname" placeholder="Enter first name">
+                            </div>
+                            <div class="col-6">
+                                <label for="actor-lastname" class="form-label">Last Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="actorLastName"
+                                    id="actor-lastname" placeholder="Enter last name">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="actor-gender" class="form-label">Gender <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select" formControlName="actorGender" id="actor-gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="actor-birthDate" class="form-label">Birth Date <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" formControlName="actorBirthDate"
+                                    id="actor-birthDate">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-6">
+                                <label for="actor-thumb" class="form-label">Actor Thumbnail</label>
+                                <input type="file" class="form-control" id="actor-thumb" accept="image/*"
+                                    (change)="onActorThumbFileChange($event)">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary mt-2" [disabled]="!actorForm.valid">Add Actor</button>
+                    </form>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!movieForm.valid">Submit</button>
+        </form>
+    </div>
+
+</div>
